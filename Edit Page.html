@@ -12,6 +12,12 @@
       background-image: url("BG.jpg");
     }
 
+     .nav button {
+      margin-top: 10px;
+       margin-right: 10px;
+    }
+
+
     h1  {
       color: white;
       text-align: center;
@@ -43,7 +49,6 @@
     .btn {
       margin-top: 10px;
       background-color: #7DC8A0;
-      margin-left:auto;
     }
 
 
@@ -73,11 +78,18 @@
       margin: 10px;
       border-radius: 10px;
       background-color: white;
+      
     }
+
+
+   
 
     .flashcard h2 {
       font-size: 15px;
     }
+
+
+  
 
     @media(max-width:768px) {
       .flashcard{
@@ -86,29 +98,25 @@
         margin-bottom: 10px;
       }
 
-@media(max-width:480px) {
-  .createbox {
-    width: 100%;
-  }
-  .flashcard {
-    width: 100%;
-  }
-  
-
+    @media(max-width:480px) {
+      .createbox {
+        width: 100%;
+       }
+      .flashcard {
+       width: 100%;
+      } 
+    }
   </style>
 </head>
 
 
 
 <body>
-   <h1><span>My Flashcards</span></h1>
-  <button type="button" class="btn btn-success float-end" style="margin-top: -50px" onclick="document.location='index.html'">Home</button> 
-
-
-
-  
-
-
+<nav class="nav justify-content-end">
+ <button type="button" class="btn btn-success" onclick="document.location='index.html'">Home</button> 
+ <button type="button" class="btn btn-success" onclick="document.location='Revision Page.html'">Start Revising</button>
+</nav> 
+ <h1><span>My Flashcards</span></h1>
  <div class=container>
    <div class=createbox>
      <h2>Create New Flashcard</h2> 
@@ -118,7 +126,7 @@
      <textarea class="form-control" id="answer" rows="3" style="resize:none"></textarea>
      <div class="text-center">
       <button type="button" class="btn btn-success"onclick="addFlashcard()">Save</button>
-      <button type="button" class="btn btn-success"id="delete_cards">Del Cards</button>
+      <button type="button" class="btn btn-success"id="del_all">Del All Cards</button>
       <p><span>Click on the card to view the answer!</span></p>
      </div>
     </div>
@@ -136,42 +144,64 @@
  var contentArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
 
 
- document.getElementById("delete_cards").addEventListener("click", function () {
-  localStorage.clear();
-  flashcards.innerHTML = '';
-  contentArray = [];
- });
-
-
  contentArray.forEach(divMaker);
  function divMaker(text) {
    var div = document.createElement("div");
    var h2_question = document.createElement("h2");
    var h2_answer = document.createElement("h2");
+   var deleteButton = document.createElement("button");
+   var answerButton = document.createElement("button");
 
    div.className = "flashcard";
 
    h2_question.setAttribute('style', "text-align: center; padding: 10px; margin-top: 20px");
    h2_question.innerHTML = text.question_input;
-
    h2_answer.setAttribute('style', "text-align: center; display: none; color: blue");
    h2_answer.innerHTML = text.answer_input;
 
-   div.appendChild(h2_question);
-   div.appendChild(h2_answer);
 
-   div.addEventListener("click", function() {
-    if (h2_answer.style.display == "none")
-      h2_answer.style.display = "block";
-    else
-      h2_answer.style.display = "none";
-  });
 
+
+  answerButton.innerHTML = "Answer";
+  answerButton.className = "btn btn-success answer-button";
+
+  div.appendChild(h2_question);
+  div.appendChild(h2_answer);
+  div.appendChild(answerButton);
+
+  answerButton.addEventListener("click", function() {
+    if (h2_answer.style.display == "none") {
+       h2_answer.style.display = "block";
+       answerButton.innerHTML = "Hide Answer";
+    } 
+    else {
+         h2_answer.style.display = "none";
+         answerButton.innerHTML = "Show Answer";
+         }
+    });
+
+   
   flashcards.appendChild(div);
- }
+ 
+    deleteButton.innerHTML = "Delete";
+      deleteButton.className = "btn btn-danger delete-button";
+      deleteButton.addEventListener("click", function() {
+         deleteFlashcard(contentArray.indexOf(text));
+      });
 
-function addFlashcard() {
-  var flashcard_text = {
+      // Append elements to the flashcard div
+      div.appendChild(h2_question);
+      div.appendChild(h2_answer);
+      div.appendChild(deleteButton);
+
+      // Append flashcard div to the container
+      flashcards.appendChild(div);
+    }
+
+
+
+    function addFlashcard() {
+    var flashcard_text = {
     'question_input': question.value,
     'answer_input': answer.value
    };
@@ -181,6 +211,55 @@ function addFlashcard() {
   question.value = '';
   answer.value = '';
  }
+
+
+
+  document.getElementById("del_all").addEventListener("click", function () {
+  localStorage.clear();
+  flashcards.innerHTML = '';
+  contentArray = [];
+ });
+
+
+
+
+
+
+
+
+
+
+
+    function deleteFlashcard(index) {
+      contentArray.splice(index, 1);
+      localStorage.setItem('items', JSON.stringify(contentArray));
+      flashcards.innerHTML = '';
+      contentArray.forEach(function(item, index) {
+        divMaker(item, index);
+      });
+    }
+  
+
+
+   
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 

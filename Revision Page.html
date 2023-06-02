@@ -14,8 +14,13 @@
 
    .btn {
       background-color: #7DC8A0;
-       margin-top: -35px;
     }
+
+    .nav button {
+      margin-top: 10px;
+       margin-right: 10px;
+    }
+
 
    .flashcard {
       width: 1000px;
@@ -34,8 +39,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: -265px;
     height: 50px; 
+    margin-top: -320px;
    }
  </style>
 </head>
@@ -43,15 +48,31 @@
 
 
 <body>
- <button type="button" class="btn btn-success float-end" onclick="document.location='index.html'">Home</button>
+    
+
+<nav class="nav justify-content-end">
+ <button type="button" class="btn btn-success" onclick="document.location='index.html'">Home</button> 
+ <button type="button" class="btn btn-success"onclick="document.location='Edit Page.html'">Edit Flashcards</button>
+</nav> 
+
+
+
+
+
+
+
+
+
+
  <div id="flashcard-container"></div>
  <div class="button-container"> 
   <button type="button" class="btn btn-success btn-lg float-start" id="prev-button">&lt;</button>
   <button type="button" class="btn btn-success btn-lg float-end" id="next-button">&gt;</button>
  </div>
-  <div class="text-center" style="margin-top:150px;">
+  <div class="text-center" style="margin-top:170px;">
    <button type="button" class="btn btn-success btn-lg" id="show-answer-button">Show Answer</button>
   </div>
+  
 
   
 
