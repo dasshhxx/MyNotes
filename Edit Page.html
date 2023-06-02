@@ -78,18 +78,19 @@
       margin: 10px;
       border-radius: 10px;
       background-color: white;
-      
     }
-
-
-   
 
     .flashcard h2 {
       font-size: 15px;
     }
 
-
-  
+    .flashcard .delete-button {
+      display: flex;
+      align-items: flex-start;
+      margin:auto;
+      background-color: red;
+   
+    }
 
     @media(max-width:768px) {
       .flashcard{
@@ -97,15 +98,18 @@
         margin-top: 10px;
         margin-bottom: 10px;
       }
+    }
 
     @media(max-width:480px) {
-      .createbox {
-        width: 100%;
-       }
-      .flashcard {
+     .createbox {
        width: 100%;
-      } 
+      }
+      .flashcard {
+        width: 100%;
+      }
     }
+  
+
   </style>
 </head>
 
@@ -144,43 +148,46 @@
  var contentArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
 
 
+ document.getElementById("del_all").addEventListener("click", function () {
+  localStorage.clear();
+  flashcards.innerHTML = '';
+  contentArray = [];
+ });
+
+
+
+
+
+
  contentArray.forEach(divMaker);
  function divMaker(text) {
    var div = document.createElement("div");
    var h2_question = document.createElement("h2");
    var h2_answer = document.createElement("h2");
    var deleteButton = document.createElement("button");
-   var answerButton = document.createElement("button");
 
    div.className = "flashcard";
 
    h2_question.setAttribute('style', "text-align: center; padding: 10px; margin-top: 20px");
    h2_question.innerHTML = text.question_input;
-   h2_answer.setAttribute('style', "text-align: center; display: none; color: blue");
+
+   h2_answer.setAttribute('style', "text-align: center; display: none; color: green");
    h2_answer.innerHTML = text.answer_input;
 
 
 
 
-  answerButton.innerHTML = "Answer";
-  answerButton.className = "btn btn-success answer-button";
 
-  div.appendChild(h2_question);
-  div.appendChild(h2_answer);
-  div.appendChild(answerButton);
+ div.appendChild(h2_question);
+   div.appendChild(h2_answer);
 
-  answerButton.addEventListener("click", function() {
-    if (h2_answer.style.display == "none") {
-       h2_answer.style.display = "block";
-       answerButton.innerHTML = "Hide Answer";
-    } 
-    else {
-         h2_answer.style.display = "none";
-         answerButton.innerHTML = "Show Answer";
-         }
-    });
+   div.addEventListener("click", function() {
+    if (h2_answer.style.display == "none")
+      h2_answer.style.display = "block";
+    else
+      h2_answer.style.display = "none";
+  });
 
-   
   flashcards.appendChild(div);
  
     deleteButton.innerHTML = "Delete";
@@ -197,38 +204,6 @@
       // Append flashcard div to the container
       flashcards.appendChild(div);
     }
-
-
-
-    function addFlashcard() {
-    var flashcard_text = {
-    'question_input': question.value,
-    'answer_input': answer.value
-   };
-  contentArray.push(flashcard_text);
-  localStorage.setItem('items', JSON.stringify(contentArray));
-  divMaker(contentArray[contentArray.length - 1]);
-  question.value = '';
-  answer.value = '';
- }
-
-
-
-  document.getElementById("del_all").addEventListener("click", function () {
-  localStorage.clear();
-  flashcards.innerHTML = '';
-  contentArray = [];
- });
-
-
-
-
-
-
-
-
-
-
 
     function deleteFlashcard(index) {
       contentArray.splice(index, 1);
@@ -256,10 +231,18 @@
 
 
 
+function addFlashcard() {
+  var flashcard_text = {
+    'question_input': question.value,
+    'answer_input': answer.value
+   };
+  contentArray.push(flashcard_text);
+  localStorage.setItem('items', JSON.stringify(contentArray));
+  divMaker(contentArray[contentArray.length - 1]);
+  question.value = '';
+  answer.value = '';
+ }
 
-
-
- 
 
 
 
