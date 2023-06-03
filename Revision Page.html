@@ -21,10 +21,9 @@
       margin-right: 10px;
     }
 
-     .flashcard p {
+    .flashcard p {
       font-size:30px;
-     }
-
+   }
 
    .flashcard {
       width: 1000px;
@@ -38,7 +37,7 @@
       margin-top: 60px;
       border-radius: 20px;
       background-color: whitesmoke;
-       overflow: auto;
+      overflow: auto;
     }
 
     .button-container {
@@ -52,146 +51,90 @@
 
 
 
-     @media(max-width:768px){
-      .flashcard {
-        width: 100%;
-        margin: auto;
+    @media(max-width:768px){
+     .flashcard {
+       width: 100%;
+       margin: auto;
       }
      } 
-
-     
-
-
-
-
-
-
-   }
  </style>
 </head>
 
 
-
 <body>
-    
+ <nav class="nav justify-content-end">
+   <button type="button" class="btn btn-success" onclick="document.location='index.html'">Home</button> 
+   <button type="button" class="btn btn-success"onclick="document.location='Edit Page.html'">Edit Flashcards</button>
+ </nav> 
 
-<nav class="nav justify-content-end">
- <button type="button" class="btn btn-success" onclick="document.location='index.html'">Home</button> 
- <button type="button" class="btn btn-success"onclick="document.location='Edit Page.html'">Edit Flashcards</button>
-</nav> 
-
-
-
-
-
-
-
-
-
-
- <div id="flashcard-container"></div>
- <div class="button-container"> 
-  <button type="button" class="btn btn-success btn-lg float-start" id="prev-button">&lt;</button>
-  <button type="button" class="btn btn-success btn-lg float-end" id="next-button">&gt;</button>
- </div>
-  <div class="text-center" style="margin-top:170px;">
-   <button type="button" class="btn btn-success btn-lg" id="show-answer-button">Show Answer</button>
+  <div id="flashcard-container"></div>
+  <div class="button-container"> 
+   <button type="button" class="btn btn-success btn-lg float-start" id="prev-button">&lt;</button>
+   <button type="button" class="btn btn-success btn-lg float-end" id="next-button">&gt;</button>
+  </div>
+   <div class="text-center" style="margin-top:170px;">
+    <button type="button" class="btn btn-success btn-lg" id="show-answer-button">Show Answer</button>
   </div>
   
 
   
 
-   
+ 
+ <script>
+   const contentArray = localStorage.getItem('items') ? 
+   JSON.parse(localStorage.getItem('items')) : [];
+
+   const flashcardContainer = document.getElementById('flashcard-container');
+
+   let currentFlashcardIndex = 0;
 
 
+   function displayCurrentFlashcard() {
+     flashcardContainer.innerHTML = '';
+
+     const currentFlashcard = contentArray[currentFlashcardIndex];
+     const div = document.createElement("div");
+     const h2_question = document.createElement("p");
+     const h2_answer = document.createElement("p");
+
+     div.className = "flashcard";
+
+     h2_question.setAttribute('style', "text-align: center; padding: 10px; margin-top: 20px");
+     h2_question.innerHTML = currentFlashcard.question_input;
+
+     h2_answer.setAttribute('style', "text-align: center; display: none; color: green");
+     h2_answer.innerHTML = currentFlashcard.answer_input;
+
+     div.appendChild(h2_question);
+     div.appendChild(h2_answer);
+
+     document.getElementById("show-answer-button").addEventListener("click", function() {
+      if (h2_answer.style.display == "none")
+        h2_answer.style.display = "block";
+      else
+        h2_answer.style.display = "none";
+    });
+
+    flashcardContainer.appendChild(div);
+   }
 
 
+   displayCurrentFlashcard();
 
 
+   document.getElementById("prev-button").addEventListener("click", function() {
+    if (currentFlashcardIndex > 0) {
+      currentFlashcardIndex--;
+      displayCurrentFlashcard();
+    }
+   });
 
 
-
-
-
-  <script>
-// Retrieve the flashcard objects from localStorage
-const contentArray = localStorage.getItem('items') ? 
-JSON.parse(localStorage.getItem('items')) : [];
-
-// Get the flashcard-container element from the HTML
-const flashcardContainer = document.getElementById('flashcard-container');
-
-// Initialize the current flashcard index
-let currentFlashcardIndex = 0;
-
-// Function to display the current flashcard
-function displayCurrentFlashcard() {
-  // Clear the flashcard container
-  flashcardContainer.innerHTML = '';
-
-  // Create HTML elements for the current flashcard
-  const currentFlashcard = contentArray[currentFlashcardIndex];
-  const div = document.createElement("div");
-  const h2_question = document.createElement("p");
-  const h2_answer = document.createElement("p");
-
-  div.className = "flashcard";
-
-  h2_question.setAttribute('style', "text-align: center; padding: 10px; margin-top: 20px");
-  h2_question.innerHTML = currentFlashcard.question_input;
-
-  h2_answer.setAttribute('style', "text-align: center; display: none; color: green");
-  h2_answer.innerHTML = currentFlashcard.answer_input;
-
-  div.appendChild(h2_question);
-  div.appendChild(h2_answer);
-
-  document.getElementById("show-answer-button").addEventListener("click", function() {
-    if (h2_answer.style.display == "none")
-      h2_answer.style.display = "block";
-    else
-      h2_answer.style.display = "none";
-  });
-
-  flashcardContainer.appendChild(div);
-}
-
-
-
-
-
-// Display the initial flashcard
-displayCurrentFlashcard();
-
-// Event listener for the "Prev" button
-document.getElementById("prev-button").addEventListener("click", function() {
-  if (currentFlashcardIndex > 0) {
-    currentFlashcardIndex--;
-    displayCurrentFlashcard();
-  }
-});
-
-// Event listener for the "Next" button
-document.getElementById("next-button").addEventListener("click", function() {
-  if (currentFlashcardIndex < contentArray.length - 1) {
-    currentFlashcardIndex++;
-    displayCurrentFlashcard();
-  }
-});
-
-
+   document.getElementById("next-button").addEventListener("click", function() {
+    if (currentFlashcardIndex < contentArray.length - 1) {
+      currentFlashcardIndex++;
+      displayCurrentFlashcard();
+    }
+   });
   </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
- </body>
+</body>

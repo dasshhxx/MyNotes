@@ -14,7 +14,7 @@
 
      .nav button {
       margin-top: 10px;
-       margin-right: 10px;
+      margin-right: 10px;
     }
 
 
@@ -157,10 +157,6 @@
  });
 
 
-
-
-
-
  contentArray.forEach(divMaker);
  function divMaker(text) {
    var div = document.createElement("div");
@@ -169,18 +165,13 @@
    var deleteButton = document.createElement("button");
 
    div.className = "flashcard";
-
    p_question.setAttribute('style', "text-align: center; padding: 10px; margin-top: 20px; color: black");
    p_question.innerHTML = text.question_input;
-
    p_answer.setAttribute('style', "text-align: center; display: none; color: green");
    p_answer.innerHTML = text.answer_input;
 
 
-
-
-
- div.appendChild(p_question);
+   div.appendChild(p_question);
    div.appendChild(p_answer);
 
    div.addEventListener("click", function() {
@@ -190,7 +181,6 @@
       p_answer.style.display = "none";
   });
 
-  flashcards.appendChild(div);
  
     deleteButton.innerHTML = "Delete";
       deleteButton.className = "btn btn-danger delete-button";
@@ -198,14 +188,16 @@
          deleteFlashcard(contentArray.indexOf(text));
       });
 
-      // Append elements to the flashcard div
+  
       div.appendChild(p_question);
       div.appendChild(p_answer);
       div.appendChild(deleteButton);
 
-      // Append flashcard div to the container
+
       flashcards.appendChild(div);
     }
+
+
 
     function deleteFlashcard(index) {
       contentArray.splice(index, 1);
@@ -216,22 +208,6 @@
       });
     }
   
-
-
-   
-  
-
-
-
-
-
-
-
-
-
-
-
-
 
 function addFlashcard() {
   var flashcard_text = {
