@@ -78,9 +78,11 @@
       margin: 10px;
       border-radius: 10px;
       background-color: white;
+      overflow: auto;
     }
 
-    .flashcard h2 {
+
+    .flashcard p {
       font-size: 15px;
     }
 
@@ -162,30 +164,30 @@
  contentArray.forEach(divMaker);
  function divMaker(text) {
    var div = document.createElement("div");
-   var h2_question = document.createElement("h2");
-   var h2_answer = document.createElement("h2");
+   var p_question = document.createElement("p");
+   var p_answer = document.createElement("p");
    var deleteButton = document.createElement("button");
 
    div.className = "flashcard";
 
-   h2_question.setAttribute('style', "text-align: center; padding: 10px; margin-top: 20px");
-   h2_question.innerHTML = text.question_input;
+   p_question.setAttribute('style', "text-align: center; padding: 10px; margin-top: 20px; color: black");
+   p_question.innerHTML = text.question_input;
 
-   h2_answer.setAttribute('style', "text-align: center; display: none; color: green");
-   h2_answer.innerHTML = text.answer_input;
-
-
+   p_answer.setAttribute('style', "text-align: center; display: none; color: green");
+   p_answer.innerHTML = text.answer_input;
 
 
 
- div.appendChild(h2_question);
-   div.appendChild(h2_answer);
+
+
+ div.appendChild(p_question);
+   div.appendChild(p_answer);
 
    div.addEventListener("click", function() {
-    if (h2_answer.style.display == "none")
-      h2_answer.style.display = "block";
+    if (p_answer.style.display == "none")
+      p_answer.style.display = "block";
     else
-      h2_answer.style.display = "none";
+      p_answer.style.display = "none";
   });
 
   flashcards.appendChild(div);
@@ -197,8 +199,8 @@
       });
 
       // Append elements to the flashcard div
-      div.appendChild(h2_question);
-      div.appendChild(h2_answer);
+      div.appendChild(p_question);
+      div.appendChild(p_answer);
       div.appendChild(deleteButton);
 
       // Append flashcard div to the container

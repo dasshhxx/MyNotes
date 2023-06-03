@@ -21,8 +21,8 @@
       margin-right: 10px;
     }
 
-     .flashcard h2 {
-      font-size:25px;
+     .flashcard p {
+      font-size:30px;
      }
 
 
@@ -38,6 +38,7 @@
       margin-top: 60px;
       border-radius: 20px;
       background-color: whitesmoke;
+       overflow: auto;
     }
 
     .button-container {
@@ -131,8 +132,8 @@ function displayCurrentFlashcard() {
   // Create HTML elements for the current flashcard
   const currentFlashcard = contentArray[currentFlashcardIndex];
   const div = document.createElement("div");
-  const h2_question = document.createElement("h2");
-  const h2_answer = document.createElement("h2");
+  const h2_question = document.createElement("p");
+  const h2_answer = document.createElement("p");
 
   div.className = "flashcard";
 
