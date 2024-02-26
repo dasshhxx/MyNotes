@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="jrp653">
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>MyNotes - Folders</title>
+    <style>
+        body {
+            background-image: url("BG.jpg");
+        } 
+
+        .nav button {
+            margin-top: 10px;
+            margin-right: 10px;
+            background-color: #7DC8A0;
+        }
+    
+        h1  {
+            color: white;
+            text-align: center;
+            font-size:50px;
+            padding-top: 10px;
+        }
+
+        h1 span {
+            background-color:#7DC8A0;
+        }
+
+        .text-center button {
+            margin: 10px;
+            margin-top:50px;
+            font-size: 30px;
+            min-width: 450px;
+            min-height: 350px;
+            background-color:#7DC8A0;
+            font-family: Monaco,Ariel;
+            font-size: 35px;
+            border-color: white;
+            border-width: 5px;
+            border-style:dashed;
+        }
+
+        @media(max-width:768px) {
+            .text-center button {
+                margin:auto;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        }
+
+
+        @media(max-width:480px) {
+            .text-center button {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+  </style>
+</head>
+
+
+<body>
+    <nav class="nav justify-content-end">
+        <button type="button" class="btn btn-success" onclick="document.location='index.html'">Home</button> 
+        <button type="button" class="btn btn-success" onclick="document.location='EditP.html'">Edit Flashcards</button>
+    </nav> 
+    <h1><span>Start Revising!</span></h1>
+    <div class="text-center">
+        <button type="button" class="btn btn-success" onclick="document.location='LP.html'">Literature</button>
+        <button type="button" class="btn btn-success" onclick="document.location='EP.html'">English</button>
+        <button type="button" class="btn btn-success" onclick="document.location='PP.html'">Psychology</button>
+        <button type="button" class="btn btn-success" onclick="document.location='CP.html'">Computer Science</button>
+        <button type="button" class="btn btn-success" onclick="document.location='MP.html'">Math</button>
+        <button type="button" class="btn btn-success" onclick="document.location='AP.html'">Art</button>
+        <button type="button" class="btn btn-success" onclick="document.location='OP.html'">Other</button>
+    </div>
+</body>
